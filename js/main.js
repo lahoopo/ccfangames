@@ -77,9 +77,22 @@ async function thumbnailBatchEndpoint(universeIDs) {
   }
 }
 
+let currentPlaceId = null; // or currentUniverseId if using that
+
+function redefinePlayButton() {
+  const playButton = document.getElementById("play-button");
+  playButton.addEventListener("click", () => {
+    if (currentPlaceId) {
+      const url = `https://www.roblox.com/games/${currentPlaceId}`;
+      window.open(url, "_blank"); // Opens in a new tab
+    }
+  });
+}
+redefinePlayButton()
 
 function showInfo(game) {
   const panel = document.getElementById('info-panel');
+  currentPlaceId = game.rootPlaceId
   panel.innerHTML = `
       <h2>${game.name}</h2>
       <h5>Creator: ${game.creator.name}</h5>
@@ -88,7 +101,9 @@ function showInfo(game) {
       <h5>Created: ${(game.created).substring(0, 10)}</h5>
       <h5>Updated: ${(game.updated).substring(0, 10)}</h5>
       <p>${game.description}</p>
+      <button id="play-button">Play</button>
     `;
+    redefinePlayButton()
 }
 
 function buttonSetup(id) {
