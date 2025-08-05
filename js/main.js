@@ -13,7 +13,7 @@ function universeIdEndpoint(placeID) {
   return fetch(cors + `https://apis.roblox.com/universes/v1/places/${placeID}/universe`)
     .then(response => {
       if (!response.ok) throw new Error("Network response was not ok (universe)");
-      return null
+      return response.json()
     })
     .then(data => {
       console.log("Universe data:", data);
