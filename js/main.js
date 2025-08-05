@@ -78,11 +78,16 @@ async function thumbnailBatchEndpoint(universeIDs) {
 }
 
 
-function showInfo(name, description) {
+function showInfo(game) {
   const panel = document.getElementById('info-panel');
   panel.innerHTML = `
-      <h2>${name}</h2>
-      <p>${description}</p>
+      <h2>${game.name}</h2>
+      <h1>Creator: ${game.creator.name}</h1>
+      <h1>Visits: ${game.visits}</h1>
+      <h1>Favorites: ${game.favoritedCount}</h1>
+      <h1>Created: ${(game.created).substring(0, 10)}</h1>
+      <h1>Updated: ${(game.updated).substring(0, 10)}</h1>
+      <p>${game.description}</p>
     `;
 }
 
@@ -91,7 +96,7 @@ function buttonSetup(id) {
   let thumb = trueImageUrls[id]
   const item = document.createElement('div');
   item.className = 'game-item';
-  item.onclick = () => showInfo(game.name, game.description);
+  item.onclick = () => showInfo(game);
   item.style.padding = "0"; // Remove default padding
   item.style.border = "1px solid black";
   item.style.overflow = "hidden";
