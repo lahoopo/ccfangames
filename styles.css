@@ -36,3 +36,16 @@ img {
   user-select: none;
   pointer-events: auto;
 }
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+  margin: 8px;
+}
+
+.image-wrapper {
+  border-radius: 12px;
+  overflow: hidden;
+  width: 100px;
+  height: 100px;
+}
