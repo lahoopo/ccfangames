@@ -85,7 +85,7 @@ function resortList() {
     if (sortedOption === "popular") {
     arrayToSort.sort((a, b) => b.visits - a.visits);
   } else if (sortedOption === "recent") {
-    games.sort((a, b) => new Date((b.created).substring(0, 10)).getTime() - new Date((a.created).substring(0, 10)).getTime());
+    arrayToSort.sort((a, b) => new Date((b.created).substring(0, 10)).getTime() - new Date((a.created).substring(0, 10)).getTime());
   }
   arrayToSort.forEach(game => {
    gameList.appendChild(allButtons[game.id])
