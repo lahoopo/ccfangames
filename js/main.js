@@ -134,25 +134,28 @@ function buttonSetup(id) {
   item.className = 'game-item';
   item.onclick = () => showInfo(game);
   item.style.padding = "0";
-  item.style.border = "1px solid black";
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
   tooltip.textContent = game.name;
   tooltip.style.zIndex = "999"
 
+  const iconContainer = document.createElement("div");
+  iconContainer.className = "icon-container";
+  iconContainer.style.padding = "0"
+  iconContainer.style.border = "1px solid black";
+
   const img = document.createElement('img');
   img.src = thumb;
   img.alt = game.name;
   img.style.width = '100%';
   img.style.height = '100%';
-  img.style.borderRadius = '11px'
   img.style.objectFit = "cover";
   img.style.display = "block";
-  img.style.border = "1px solid black";
 
   item.appendChild(tooltip);
-  item.appendChild(img);
+  item.appendChild(iconContainer);
+  iconContainer.appendChild(img);
   gameList.appendChild(item);
   allButtons[id] = item
   resortList()
@@ -210,4 +213,3 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
-
