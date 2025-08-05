@@ -7,7 +7,7 @@ const gameList = document.getElementById('game-list');
 let trueImageUrls = {}
 let trueGameData = {}
 let lastUniverseIds = []
-const batchSize = 20
+const batchSize = 5
 
 async function waitUntilFalse(variableRef) {
   while (variableRef()) {
@@ -161,3 +161,4 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
+
