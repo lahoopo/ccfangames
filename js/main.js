@@ -35,7 +35,7 @@ function gameBatchEndpoint(universeIDs) {
   return fetch(cors + `https://games.roblox.com/v1/games?universeIds=${universeIDs.join(",")}`)
     .then(response => {
       if (!response.ok) throw new Error("Network response was not ok (game batch)");
-      return null
+      return response.json()
     })
     .then(data => {
       console.log("Game data:", data);
