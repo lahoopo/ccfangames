@@ -82,11 +82,11 @@ function showInfo(game) {
   const panel = document.getElementById('info-panel');
   panel.innerHTML = `
       <h2>${game.name}</h2>
-      <h1>Creator: ${game.creator.name}</h1>
-      <h1>Visits: ${game.visits}</h1>
-      <h1>Favorites: ${game.favoritedCount}</h1>
-      <h1>Created: ${(game.created).substring(0, 10)}</h1>
-      <h1>Updated: ${(game.updated).substring(0, 10)}</h1>
+      <h5>Creator: ${game.creator.name}</h5>
+      <h5>Visits: ${game.visits}</h5>
+      <h5>Favorites: ${game.favoritedCount}</h5>
+      <h5>Created: ${(game.created).substring(0, 10)}</h5>
+      <h5>Updated: ${(game.updated).substring(0, 10)}</h5>
       <p>${game.description}</p>
     `;
 }
