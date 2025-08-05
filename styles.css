@@ -18,7 +18,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); /* Center both ways */
-  background-color: rgba(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0);
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
