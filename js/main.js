@@ -1,5 +1,5 @@
 
-
+const cors = "https://corsproxy.io/?";
 const sheetID = '1YoTh5uHND8HW0BhM3jCuj3v4hwu1BllUZx0OwB-LioA'; // your real ID
 const sheetsURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
 const gameList = document.getElementById('game-list');
@@ -10,7 +10,7 @@ let lastUniverseIds = {}
 const batchSize = 20
 
 function universeIdEndpoint(placeID) {
-  return fetch(`https://apis.roproxy.com/universes/v1/places/${placeID}/universe`)
+  return fetch(cors + `https://apis.roblox.com/universes/v1/places/${placeID}/universe`)
     .then(response => {
       if (!response.ok) throw new Error("Network response was not ok (universe)");
       return null
@@ -26,7 +26,7 @@ function universeIdEndpoint(placeID) {
 }
 
 function gameBatchEndpoint(universeIDs) {
-  return fetch(`https://games.roproxy.com/v1/games?universeIds=${universeIDs.join(",")}`)
+  return fetch(cors + `https://games.roblox.com/v1/games?universeIds=${universeIDs.join(",")}`)
     .then(response => {
       if (!response.ok) throw new Error("Network response was not ok (game batch)");
       return null
@@ -53,7 +53,7 @@ async function thumbnailBatchEndpoint(universeIDs) {
   }));
 
   try {
-    const response = await fetch("https://thumbnails.roproxy.com/v1/batch", {
+    const response = await fetch(cors + "https://thumbnails.roblox.com/v1/batch", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
