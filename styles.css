@@ -40,13 +40,12 @@ img {
 .game-item {
   position: relative;
   display: inline-block;
-  margin: 8px;
   background-color: transparent;
 }
 
 .icon-container {
   border-radius: 12px;
   overflow: hidden;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
 }
