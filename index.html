@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <script src="js/main.js" defer></script>
+<link rel="stylesheet" href="styles.css">
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -86,7 +87,7 @@
 </head>
 <body>
   <header>
-    <h1>Roblox Games</h1>
+    <h1>Cube Cavern Archives</h1>
     <div>
       <select id="sort-options">
         <option value="popular">Most Popular</option>
@@ -104,17 +105,8 @@
     <div class="side-panel" id="info-panel">
       <h2>Game Info</h2>
       <p>Select a game to see details.</p>
+      <button id="play-button">Play</button>
     </div>
   </main>
-
-  <script>
-    function showInfo(gameName) {
-      const panel = document.getElementById('info-panel');
-      panel.innerHTML = `
-        <h2>${gameName}</h2>
-        <p>Details about ${gameName} will appear here.</p>
-      `;
-    }
-  </script>
 </body>
 </html>
