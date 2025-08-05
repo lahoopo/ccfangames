@@ -93,7 +93,7 @@ function buttonSetup(id) {
   item.className = 'game-item';
   item.onclick = () => showInfo(game.name, game.description);
   item.style.padding = "0"; // Remove default padding
-  item.style.border = "0px solid black";
+  item.style.border = "1px solid black";
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
@@ -104,7 +104,9 @@ function buttonSetup(id) {
   img.alt = game.name;
   img.style.width = '100%';
   img.style.height = '100%';
-  img.style.border = "0px solid black";
+  //img.style.border = "0px solid black";
+  img.style.objectFit = "cover"; // Optional: crop to fit without distortion
+  img.style.display = "block";   // Removes whitespace below the image
 
   item.appendChild(tooltip);
   item.appendChild(img);
