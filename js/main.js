@@ -94,6 +94,7 @@ function buttonSetup(id) {
   item.onclick = () => showInfo(game.name, game.description);
   item.style.padding = "0"; // Remove default padding
   item.style.border = "1px solid black";
+  item.style.overflow = "hidden";
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
