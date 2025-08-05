@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roblox Game List</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background: #1f1f1f;
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    .side-panel {
+      width: 300px;
+      background: #f4f4f4;
+      padding: 15px;
+      overflow-y: auto;
+    }
+
+    .game-list-container {
+      flex: 1;
+      overflow-y: auto;
+      background: #fafafa;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px;
+      gap: 10px;
+      align-content: flex-start;
+    }
+
+    .game-item {
+      width: 100px;
+      height: 100px;
+      background: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+
+    .game-item:hover {
+      background: #bbb;
+    }
+
+    .tooltip {
+      position: absolute;
+      bottom: 110%;
+      background: black;
+      color: white;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .game-item:hover .tooltip {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Roblox Games</h1>
+    <div>
+      <select id="sort-options">
+        <option value="popular">Most Popular</option>
+        <option value="recent">Most Recent</option>
+        <option value="rating">Top Rated</option>
+      </select>
+    </div>
+  </header>
+
+  <main>
+    <div class="game-list-container" id="game-list">
+      <!-- Sample game icons -->
+      <div class="game-item" onclick="showInfo('Game 1')">
+        <div class="tooltip">Game 1</div>
+        🎮
+      </div>
+      <div class="game-item" onclick="showInfo('Game 2')">
+        <div class="tooltip">Game 2</div>
+        🚀
+      </div>
+      <div class="game-item" onclick="showInfo('Game 3')">
+        <div class="tooltip">Game 3</div>
+        🏰
+      </div>
+    </div>
+
+    <div class="side-panel" id="info-panel">
+      <h2>Game Info</h2>
+      <p>Select a game to see details.</p>
+    </div>
+  </main>
+
+  <script>
+    function showInfo(gameName) {
+      const panel = document.getElementById('info-panel');
+      panel.innerHTML = `
+        <h2>${gameName}</h2>
+        <p>Details about ${gameName} will appear here.</p>
+      `;
+    }
+  </script>
+</body>
+</html>
