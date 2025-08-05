@@ -42,7 +42,7 @@ function gameBatchEndpoint(universeIDs) {
 }
 
 async function thumbnailBatchEndpoint(universeIDs) {
-  const payload = placeIds.map(id => ({
+  const payload = universeIDs.map(id => ({
     requestId: `${id}::GameIcon:256x256:webp:regular:`,
     type: "GameIcon",
     targetId: id,
@@ -136,20 +136,13 @@ fetch(sheetsURL)
     const json = JSON.parse(text.substring(47).slice(0, -2)); // Google adds garbage before/after
     const rows = json.table.rows;
 
-    const gameIDs = rows.map(row => row.c[0]?.v).filter(Boolean); // Only column A
+    const gameIDs = rows.map(row => row.c[4]?.v).filter(Boolean); // Only column A
     console.log(gameIDs); // Example output: [12345678, 98765432]
 
     // Now do something with the game IDs
     gameIDs.forEach(id => {
       console.log(`Game ID: ${id}`);
-      universeIdEndpoint(id).then(universeId => {
-        if (universeId) {
-          lastUniverseIds.push(universeId)
-          if (lastUniverseIds.length >= batchSize) {
-            batchData()
-          }
-        }
-      });
+          lastUniverseIds.push(id)
       // You could then fetch data from Roblox API or use this to build game tiles dynamically
     });
     batchData()
