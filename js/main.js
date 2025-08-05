@@ -7,7 +7,7 @@ const gameList = document.getElementById('game-list');
 let trueImageUrls = {}
 let trueGameData = {}
 let lastUniverseIds = []
-const batchSize = 20
+const batchSize = 30
 
 async function waitUntilFalse(variableRef) {
   while (variableRef()) {
