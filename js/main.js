@@ -39,7 +39,7 @@ function gameBatchEndpoint(universeIDs) {
     })
     .then(data => {
       console.log("Game data:", data);
-      return data
+      return data.data
     })
     .catch(error => {
       console.error("Fetch error:", error);
