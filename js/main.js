@@ -123,16 +123,16 @@ function batchData() {
       thumbnails.forEach(thumb => {
         console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
         trueImageUrls[thumb.targetId] = thumb.imageUrl
-        if (otherBatch) { alreadyBatching = false; buttonSetup(thumb.targetId) } else { otherBatch = true }
       });
+      if (otherBatch) { alreadyBatching = false; buttonSetup(thumb.targetId) } else { otherBatch = true }
     });
   gameBatchEndpoint(uniIds).then(
     games => {
       games.forEach(game => {
         console.log(`Game (2) ${game.id} =>`, game.name);
         trueGameData[game.id] = game
-        if (otherBatch) { alreadyBatching = false; buttonSetup(game.id) } else { otherBatch = true }
       });
+      if (otherBatch) { alreadyBatching = false; buttonSetup(game.id) } else { otherBatch = true }
     })
 }
 
@@ -161,4 +161,3 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
-
