@@ -123,16 +123,18 @@ function batchData() {
       thumbnails.forEach(thumb => {
         console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
         trueImageUrls[thumb.targetId] = thumb.imageUrl
+        if (otherBatch) { buttonSetup(thumb.targetId) }
       });
-      if (otherBatch) { alreadyBatching = false; buttonSetup(thumb.targetId) } else { otherBatch = true }
+      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
     });
   gameBatchEndpoint(uniIds).then(
     games => {
       games.forEach(game => {
         console.log(`Game (2) ${game.id} =>`, game.name);
         trueGameData[game.id] = game
+        if (otherBatch) { buttonSetup(game.id) }
       });
-      if (otherBatch) { alreadyBatching = false; buttonSetup(game.id) } else { otherBatch = true }
+      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
     })
 }
 
