@@ -80,27 +80,27 @@ function showInfo(name, description) {
     `;
 }
 
-function buttonSetup() {
-  games.forEach(game => {
-    const item = document.createElement('div');
-    item.className = 'game-item';
-    item.onclick = () => showInfo(game.name, game.description);
+function buttonSetup(id) {
+  let game = trueGameData[id]
+  let thumb = trueImageUrls[id]
+  const item = document.createElement('div');
+  item.className = 'game-item';
+  item.onclick = () => showInfo(game.name, game.description);
 
-    const tooltip = document.createElement('div');
-    tooltip.className = 'tooltip';
-    tooltip.textContent = game.name;
+  const tooltip = document.createElement('div');
+  tooltip.className = 'tooltip';
+  tooltip.textContent = game.name;
 
-    const img = document.createElement('img');
-    img.src = game.icon;
-    img.alt = game.name;
-    img.style.width = '80px';
-    img.style.height = '80px';
-    img.style.borderRadius = '6px';
+  const img = document.createElement('img');
+  img.src = thumb;
+  img.alt = game.name;
+  img.style.width = '80px';
+  img.style.height = '80px';
+  img.style.borderRadius = '6px';
 
-    item.appendChild(tooltip);
-    item.appendChild(img);
-    gameList.appendChild(item);
-  });
+  item.appendChild(tooltip);
+  item.appendChild(img);
+  gameList.appendChild(item);
 }
 
 let alreadyBatching = false
@@ -113,21 +113,21 @@ function batchData() {
     uniIds.push(lastUniverseIds.shift())
   }
   thumbnailBatchEndpoint(uniIds)
-  .then(thumbnails => {
-    thumbnails.forEach(thumb => {
-      console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
-      trueImageUrls[thumb.targetId] = thumb.imageUrl
-      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
+    .then(thumbnails => {
+      thumbnails.forEach(thumb => {
+        console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
+        trueImageUrls[thumb.targetId] = thumb.imageUrl
+        if (otherBatch) { alreadyBatching = false; buttonSetup(thumb.targetId) } else { otherBatch = true }
+      });
     });
-  });
-  gameBatchEndpoint(universeIDs).then(
+  gameBatchEndpoint(uniIds).then(
     games => {
-    games.forEach(game => {
-      console.log(`Game (2) ${game.id} =>`, game.name);
-      trueGameData[game.id] = game
-      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
-    });
-  })
+      games.forEach(game => {
+        console.log(`Game (2) ${game.id} =>`, game.name);
+        trueGameData[game.id] = game
+        if (otherBatch) { alreadyBatching = false; buttonSetup(game.id) } else { otherBatch = true }
+      });
+    })
 }
 
 fetch(sheetsURL)
@@ -152,5 +152,6 @@ fetch(sheetsURL)
       });
       // You could then fetch data from Roblox API or use this to build game tiles dynamically
     });
+    batchData()
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
