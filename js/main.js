@@ -88,7 +88,6 @@ function redefinePlayButton() {
     }
   });
 }
-redefinePlayButton()
 
 function showInfo(game) {
   const panel = document.getElementById('info-panel');
@@ -188,3 +187,4 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
+
