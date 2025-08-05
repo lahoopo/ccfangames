@@ -6,7 +6,7 @@ const gameList = document.getElementById('game-list');
 
 let trueImageUrls = {}
 let trueGameData = {}
-let lastUniverseIds = {}
+let lastUniverseIds = []
 const batchSize = 20
 
 function universeIdEndpoint(placeID) {
@@ -107,7 +107,7 @@ let alreadyBatching = false
 function batchData() {
   if (alreadyBatching) { return }
   alreadyBatching = true
-  let uniIds = {}
+  let uniIds = []
   let otherBatch = false
   for (let i = 0; i < lastUniverseIds.length; i++) {
     uniIds.push(lastUniverseIds.shift())
