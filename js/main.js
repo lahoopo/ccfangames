@@ -146,7 +146,7 @@ function buttonSetup(id) {
   img.alt = game.name;
   img.style.width = '100%';
   img.style.height = '100%';
-  img.style.borderRadius = '12px'
+  img.style.borderRadius = '11px'
   img.style.objectFit = "cover";
   img.style.display = "block";
   img.style.border = "1px solid black";
@@ -210,3 +210,4 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
+
