@@ -149,6 +149,7 @@ function buttonSetup(id) {
   img.style.borderRadius = '12px'
   img.style.objectFit = "cover";
   img.style.display = "block";
+  img.style.border = "1px solid black";
 
   item.appendChild(tooltip);
   item.appendChild(img);
