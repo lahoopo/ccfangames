@@ -139,7 +139,8 @@ function buttonSetup(id) {
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
   tooltip.textContent = game.name;
-  tooltip.style.bottom = "0%"
+  tooltip.style.bottom = "50%"
+  tooltip.style.zIndex = "999"
 
   const img = document.createElement('img');
   img.src = thumb;
