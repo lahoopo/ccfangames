@@ -41,6 +41,7 @@ img {
   position: relative;
   display: inline-block;
   margin: 8px;
+  background-color: transparent;
 }
 
 .icon-container {
