@@ -7,7 +7,7 @@ const gameList = document.getElementById('game-list');
 let trueImageUrls = {}
 let trueGameData = {}
 let lastUniverseIds = []
-const batchSize = 12
+const batchSize = 20
 
 async function waitUntilFalse(variableRef) {
   while (variableRef()) {
@@ -92,6 +92,8 @@ function buttonSetup(id) {
   const item = document.createElement('div');
   item.className = 'game-item';
   item.onclick = () => showInfo(game.name, game.description);
+  item.style.padding = "0"; // Remove default padding
+  item.style.border = "0px solid black";
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
@@ -100,9 +102,9 @@ function buttonSetup(id) {
   const img = document.createElement('img');
   img.src = thumb;
   img.alt = game.name;
-  img.style.width = '80px';
-  img.style.height = '80px';
-  img.style.border = "1px solid black";
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.border = "0px solid black";
 
   item.appendChild(tooltip);
   item.appendChild(img);
