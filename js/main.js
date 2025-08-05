@@ -6,6 +6,7 @@ const gameList = document.getElementById('game-list');
 
 let trueImageUrls = {}
 let trueGameData = {}
+let allButtons = {}
 let lastUniverseIds = []
 const batchSize = 30
 
@@ -77,6 +78,25 @@ async function thumbnailBatchEndpoint(universeIDs) {
   }
 }
 
+let sortedOption = "popular"
+
+function resortList() {
+  let arrayToSort = Object.values(trueGameData)
+    if (value === "popular") {
+    arrayToSort.sort((a, b) => b.visits - a.visits);
+  } else if (value === "recent") {
+    games.sort((a, b) => new Date((b.created).substring(0, 10)).getTime() - new Date((a.created).substring(0, 10)).getTime());
+  }
+  arrayToSort.forEach(game => {
+   gameList.appendChild(allButtons[game.id])
+  });
+}
+
+document.getElementById("sort-options").addEventListener("change", (e) => {
+  sortedOption = e.target.value;
+  resortList();
+});
+
 let currentPlaceId = null; // or currentUniverseId if using that
 
 function redefinePlayButton() {
@@ -131,6 +151,8 @@ function buttonSetup(id) {
   item.appendChild(tooltip);
   item.appendChild(img);
   gameList.appendChild(item);
+  allButtons[id] = item
+  resortList()
 }
 
 let alreadyBatching = false
@@ -187,4 +209,3 @@ fetch(sheetsURL)
     })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
-
