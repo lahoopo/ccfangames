@@ -7,7 +7,7 @@ const gameList = document.getElementById('game-list');
 let trueImageUrls = {}
 let trueGameData = {}
 let lastUniverseIds = []
-const batchSize = 5
+const batchSize = 12
 
 async function waitUntilFalse(variableRef) {
   while (variableRef()) {
@@ -102,7 +102,7 @@ function buttonSetup(id) {
   img.alt = game.name;
   img.style.width = '80px';
   img.style.height = '80px';
-  img.style.borderRadius = '6px';
+  img.style.border = "1px solid black";
 
   item.appendChild(tooltip);
   item.appendChild(img);
