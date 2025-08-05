@@ -1,6 +1,6 @@
 
 const cors = "https://corsproxy.io/?";
-const sheetID = '1YoTh5uHND8HW0BhM3jCuj3v4hwu1BllUZx0OwB-LioA'; // your real ID
+const sheetID = '1YoTh5uHND8HW0BhM3jCuj3v4hwu1BllUZx0OwB-LioA';
 const sheetsURL = `https://docs.google.com/spreadsheets/d/${sheetID}/gviz/tq?tqx=out:json`;
 const gameList = document.getElementById('game-list');
 
@@ -12,7 +12,7 @@ const batchSize = 30
 
 async function waitUntilFalse(variableRef) {
   while (variableRef()) {
-    await new Promise(resolve => setTimeout(resolve, 50)); // Check every 100ms
+    await new Promise(resolve => setTimeout(resolve, 50));
   }
 }
 
@@ -71,7 +71,7 @@ async function thumbnailBatchEndpoint(universeIDs) {
     if (!response.ok) throw new Error("Failed to fetch thumbnails");
 
     const data = await response.json();
-    return data.data; // array of thumbnail responses
+    return data.data;
   } catch (error) {
     console.error("Thumbnail fetch error:", error);
     return [];
@@ -99,14 +99,14 @@ document.getElementById("sort-options").addEventListener("change", (e) => {
   resortList();
 });
 
-let currentPlaceId = null; // or currentUniverseId if using that
+let currentPlaceId = null;
 
 function redefinePlayButton() {
   const playButton = document.getElementById("play-button");
   playButton.addEventListener("click", () => {
     if (currentPlaceId) {
       const url = `https://www.roblox.com/games/${currentPlaceId}`;
-      window.open(url, "_blank"); // Opens in a new tab
+      window.open(url, "_blank");
     }
   });
 }
@@ -133,22 +133,22 @@ function buttonSetup(id) {
   const item = document.createElement('div');
   item.className = 'game-item';
   item.onclick = () => showInfo(game);
-  item.style.padding = "0"; // Remove default padding
+  item.style.padding = "0";
   item.style.border = "1px solid black";
-  item.style.overflow = "hidden";
 
   const tooltip = document.createElement('div');
   tooltip.className = 'tooltip';
   tooltip.textContent = game.name;
+  tooltip.style.bottom = "0%"
 
   const img = document.createElement('img');
   img.src = thumb;
   img.alt = game.name;
   img.style.width = '100%';
   img.style.height = '100%';
-  //img.style.border = "0px solid black";
-  img.style.objectFit = "cover"; // Optional: crop to fit without distortion
-  img.style.display = "block";   // Removes whitespace below the image
+  img.style.borderRadius = '11px'
+  img.style.objectFit = "cover";
+  img.style.display = "block";
 
   item.appendChild(tooltip);
   item.appendChild(img);
@@ -192,14 +192,12 @@ fetch(sheetsURL)
     const json = JSON.parse(text.substring(47).slice(0, -2)); // Google adds garbage before/after
     const rows = json.table.rows;
 
-    const gameIDs = rows.map(row => row.c[4]?.v).filter(Boolean); // Only column A
-    console.log(gameIDs); // Example output: [12345678, 98765432]
+    const gameIDs = rows.map(row => row.c[4]?.v).filter(Boolean); // One column
+    console.log(gameIDs);
 
-    // Now do something with the game IDs
     gameIDs.forEach(id => {
       console.log(`Game ID: ${id}`);
       lastUniverseIds.push(id)
-      // You could then fetch data from Roblox API or use this to build game tiles dynamically
     });
     (async () => {
       while (lastUniverseIds.length > 0) {
