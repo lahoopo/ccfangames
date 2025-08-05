@@ -12,3 +12,12 @@
 #play-button:hover {
   background-color: #333;
 }
+
+img {
+  user-drag: none;       /* Safari */
+  -webkit-user-drag: none; /* Chrome, Safari */
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  pointer-events: auto;
+}
