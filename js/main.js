@@ -1,4 +1,4 @@
-<script>
+
   const games = [
     {
       name: "Bloxburg",
@@ -47,4 +47,3 @@
       <p>${description}</p>
     `;
   }
-</script>
