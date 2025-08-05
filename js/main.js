@@ -9,6 +9,12 @@ let trueGameData = {}
 let lastUniverseIds = []
 const batchSize = 20
 
+async function waitUntilFalse(variableRef) {
+  while (variableRef()) {
+    await new Promise(resolve => setTimeout(resolve, 50)); // Check every 100ms
+  }
+}
+
 function universeIdEndpoint(placeID) {
   return fetch(cors + `https://apis.roblox.com/universes/v1/places/${placeID}/universe`)
     .then(response => {
@@ -109,7 +115,7 @@ function batchData() {
   alreadyBatching = true
   let uniIds = []
   let otherBatch = false
-  for (let i = 0; i < lastUniverseIds.length; i++) {
+  for (let i = 0; i < Math.min(lastUniverseIds.length, batchSize); i++) {
     uniIds.push(lastUniverseIds.shift())
   }
   thumbnailBatchEndpoint(uniIds)
@@ -142,9 +148,16 @@ fetch(sheetsURL)
     // Now do something with the game IDs
     gameIDs.forEach(id => {
       console.log(`Game ID: ${id}`);
-          lastUniverseIds.push(id)
+      lastUniverseIds.push(id)
       // You could then fetch data from Roblox API or use this to build game tiles dynamically
     });
-    batchData()
+    (async () => {
+      while (lastUniverseIds.length > 0) {
+        console.log("Waiting...");
+        batchData()
+        await waitUntilFalse(() => alreadyBatching);
+        console.log("Done waiting!");
+      }
+    })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
