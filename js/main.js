@@ -174,20 +174,20 @@ function batchData() {
   thumbnailBatchEndpoint(uniIds)
     .then(thumbnails => {
       thumbnails.forEach(thumb => {
-       // console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
+        // console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
         trueImageUrls[thumb.targetId] = thumb.imageUrl
         if (otherBatch) { buttonSetup(thumb.targetId) }
       });
-      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
+      if (otherBatch) { alreadyBatching = false; batchData() } else { otherBatch = true }
     });
   gameBatchEndpoint(uniIds).then(
     games => {
       games.forEach(game => {
-     //   console.log(`Game (2) ${game.id} =>`, game.name);
+        //   console.log(`Game (2) ${game.id} =>`, game.name);
         trueGameData[game.id] = game
         if (otherBatch) { buttonSetup(game.id) }
       });
-      if (otherBatch) { alreadyBatching = false } else { otherBatch = true }
+      if (otherBatch) { alreadyBatching = false; batchData() } else { otherBatch = true }
     })
 }
 
@@ -201,16 +201,17 @@ fetch(sheetsURL)
     console.log(gameIDs);
 
     gameIDs.forEach(id => {
-     // console.log(`Game ID: ${id}`);
+      // console.log(`Game ID: ${id}`);
       lastUniverseIds.push(id)
     });
-    (async () => {
-      while (lastUniverseIds.length > 0) {
-        console.log("Waiting...");
-        batchData()
-        await waitUntilFalse(() => alreadyBatching);
-        console.log("Done waiting!");
-      }
-    })();
+    batchData()
+    // (async () => {
+    //   while (lastUniverseIds.length > 0) {
+    //     console.log("Waiting...");
+    //     batchData()
+    //     await waitUntilFalse(() => alreadyBatching);
+    //     console.log("Done waiting!");
+    //   }
+    // })();
   })
   .catch(err => console.error('Failed to fetch sheet:', err));
