@@ -167,13 +167,14 @@ function batchData() {
   alreadyBatching = true
   let uniIds = []
   let otherBatch = false
+  console.log(Math.min(lastUniverseIds.length, batchSize));
   for (let i = 0; i < Math.min(lastUniverseIds.length, batchSize); i++) {
     uniIds.push(lastUniverseIds.shift())
   }
   thumbnailBatchEndpoint(uniIds)
     .then(thumbnails => {
       thumbnails.forEach(thumb => {
-        console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
+       // console.log(`Game ${thumb.targetId} =>`, thumb.imageUrl);
         trueImageUrls[thumb.targetId] = thumb.imageUrl
         if (otherBatch) { buttonSetup(thumb.targetId) }
       });
@@ -182,7 +183,7 @@ function batchData() {
   gameBatchEndpoint(uniIds).then(
     games => {
       games.forEach(game => {
-        console.log(`Game (2) ${game.id} =>`, game.name);
+     //   console.log(`Game (2) ${game.id} =>`, game.name);
         trueGameData[game.id] = game
         if (otherBatch) { buttonSetup(game.id) }
       });
@@ -200,7 +201,7 @@ fetch(sheetsURL)
     console.log(gameIDs);
 
     gameIDs.forEach(id => {
-      console.log(`Game ID: ${id}`);
+     // console.log(`Game ID: ${id}`);
       lastUniverseIds.push(id)
     });
     (async () => {
